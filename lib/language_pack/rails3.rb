@@ -36,11 +36,6 @@ private
     super.concat(%w( rails3_serve_static_assets )).uniq
   end
 
-  def binaries
-    node = gem_is_bundled?('execjs') ? [NODE_JS_BINARY_PATH] : []
-    super + node
-  end
-
   def run_assets_precompile_task
     if rake_task_defined?("assets:precompile")
       topic("Preparing app for Rails asset pipeline")
