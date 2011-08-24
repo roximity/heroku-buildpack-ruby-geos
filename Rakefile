@@ -81,3 +81,15 @@ task "libyaml:update" do
   sh "git add vendor/yaml-*"
   sh "rm yaml.tgz" if File.exists?("yaml.tgz")
 end
+
+desc "install rubygems"
+task "rubygems:install", :version do |t, args|
+  rubygems_dir = "rubygems-#{args[:version]}"
+  sh "curl -o rubygems.tgz http://production.cf.rubygems.org/rubygems/#{rubygems_dir}.tgz"
+  sh "git rm vendor/rubygems-*" if Dir['vendor/rubygems-*'].any?
+  sh "tar -zvxf rubygems.tgz"
+  sh "cd #{rubygems_dir} && ruby setup.rb --prefix=../vendor/#{rubygems_dir}"
+  sh "git add vendor/rubygems-*"
+  sh "rm rubygems.tgz" if File.exists?("rubygems.tgz")
+  sh "rm -rf #{rubygems_dir}" if File.exists?(rubygems_dir)
+end
