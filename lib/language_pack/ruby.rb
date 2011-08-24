@@ -4,7 +4,8 @@ require "language_pack/base"
 require "bundler"
 
 class LanguagePack::Ruby < LanguagePack::Base
-  YAML_PATH = "yaml-0.1.4"
+  YAML_PATH     = "yaml-0.1.4"
+  RUBYGEMS_PATH = "rubygems-1.8.7"
 
   def self.use?
     File.exist?("Gemfile")
@@ -23,6 +24,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       "LANG"     => "en_US.UTF-8",
       "PATH"     => default_path,
       "GEM_PATH" => slug_vendor_base,
+      "RUBYOPT"  => "-Ivendor/#{RUBYGEMS_PATH}/lib"
     }
   end
 
@@ -54,6 +56,10 @@ private
     File.expand_path("../../../vendor/gems", __FILE__)
   end
 
+  def rubygems_path
+    File.expand_path("../../../vendor/#{RUBYGEMS_PATH}", __FILE__)
+  end
+
   def slug_vendor_base
     "vendor/bundle/ruby/1.9.1"
   end
@@ -68,6 +74,11 @@ private
   def install_language_pack_gems
     FileUtils.mkdir_p(File.dirname(slug_vendor_base))
     FileUtils.cp_r("#{language_pack_gems}/.", slug_vendor_base, :preserve => true)
+  end
+
+  def install_rubygems
+    FileUtils.mkdir_p("vendor")
+    FileUtils.cp_r("#{rubygems_path}", "vendor", :preserve => true)
   end
 
   def binaries
@@ -111,6 +122,7 @@ private
     cache_load ".bundle"
     cache_load "vendor/bundle"
 
+    install_rubygems
     install_language_pack_gems
 
     version = run("bundle version").strip
