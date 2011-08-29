@@ -96,7 +96,7 @@ private
     yaml_include   = File.expand_path("#{binary_root}/#{YAML_PATH}/include")
     yaml_lib       = File.expand_path("#{binary_root}/#{YAML_PATH}/lib")
     env_vars       = "env CPATH=#{yaml_include}:$CPATH CPPATH=#{yaml_include}:$CPPATH LIBRARY_PATH=#{yaml_lib}:$LIBRARY_PATH"
-    bundle_command = "bundle install --without development:test --path vendor/bundle"
+    bundle_command = "bundle install --without development:test --path vendor/bundle --binstubs bin/"
 
     unless File.exist?("Gemfile.lock")
       error "Gemfile.lock is required. Please run \"bundle install\" locally\nand commit your Gemfile.lock."
