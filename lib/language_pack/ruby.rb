@@ -69,6 +69,9 @@ private
       ENV[key] = value
     end
     ENV["GEM_HOME"] = slug_vendor_base
+    if ENV['MY_RUBY_HOME']
+      ENV['PATH'] = "#{ENV['MY_RUBY_HOME']}/bin:#{ENV['PATH']}"
+    end
   end
 
   def install_language_pack_gems
