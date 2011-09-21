@@ -69,7 +69,7 @@ private
   end
 
   def binaries
-    [RUBY_CONSOLE_BINARY_PATH]
+    [console_binary]
   end
 
   def install_binaries
@@ -88,6 +88,10 @@ private
 
   def binary_root
     File.expand_path("../../../vendor", __FILE__)
+  end
+
+  def console_binary
+    RUBY_CONSOLE_BINARY_PATH
   end
 
   def build_bundler

@@ -40,10 +40,9 @@ class LanguagePack::Rails2 < LanguagePack::Ruby
     install_plugins
   end
 
-  def binaries
-    [RAILS2_CONSOLE_BINARY_PATH]
+  def console_binary
+    RAILS2_CONSOLE_BINARY_PATH
   end
-
 private
 
   def plugins

@@ -38,7 +38,11 @@ private
 
   def binaries
     node = gem_is_bundled?('execjs') ? [NODE_JS_BINARY_PATH] : []
-    super + node + [RAILS3_CONSOLE_BINARY_PATH]
+    super + node
+  end
+
+  def console_binary
+    RAILS3_CONSOLE_BINARY_PATH
   end
 
   def setup_asset_pipeline
