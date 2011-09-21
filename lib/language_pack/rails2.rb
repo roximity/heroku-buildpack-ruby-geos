@@ -3,6 +3,7 @@ require "language_pack"
 require "language_pack/rack"
 
 class LanguagePack::Rails2 < LanguagePack::Ruby
+  RAILS2_CONSOLE_BINARY_PATH = 'heroku_rails2/console'
 
   def self.use?
     super && File.exist?("config/environment.rb")
@@ -26,8 +27,7 @@ class LanguagePack::Rails2 < LanguagePack::Ruby
 
     super.merge({
       "web" => web_process,
-      "worker" => "bundle exec rake jobs:work",
-      "console" => "bundle exec script/console"
+      "worker" => "bundle exec rake jobs:work"
     })
   end
 
@@ -38,6 +38,10 @@ class LanguagePack::Rails2 < LanguagePack::Ruby
   def compile
     super
     install_plugins
+  end
+
+  def binaries
+    [RAILS2_CONSOLE_BINARY_PATH]
   end
 
 private
