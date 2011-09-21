@@ -3,6 +3,7 @@ require "language_pack/rails2"
 
 class LanguagePack::Rails3 < LanguagePack::Rails2
   NODE_JS_BINARY_PATH = 'node-0.4.7/node'
+  RAILS3_CONSOLE_BINARY_PATH = 'heroku_rails3/console'
 
   def self.use?
     super &&
@@ -20,8 +21,7 @@ class LanguagePack::Rails3 < LanguagePack::Rails2
                     "bundle exec rails server -p $PORT"
 
     super.merge({
-      "web" => web_process,
-      "console" => "bundle exec rails console"
+      "web" => web_process
     })
   end
 
@@ -38,7 +38,7 @@ private
 
   def binaries
     node = gem_is_bundled?('execjs') ? [NODE_JS_BINARY_PATH] : []
-    super + node
+    super + node + [RAILS3_CONSOLE_BINARY_PATH]
   end
 
   def setup_asset_pipeline
