@@ -5,6 +5,7 @@ require "bundler"
 
 class LanguagePack::Ruby < LanguagePack::Base
   YAML_PATH = "yaml-0.1.4"
+  RUBY_CONSOLE_BINARY_PATH = "heroku_ruby/console"
 
   def self.use?
     File.exist?("Gemfile")
@@ -27,9 +28,7 @@ class LanguagePack::Ruby < LanguagePack::Base
   end
 
   def default_process_types
-    {
-      "console" => "bundle exec irb"
-    }
+    { }
   end
 
   def compile
@@ -70,7 +69,7 @@ private
   end
 
   def binaries
-    []
+    [RUBY_CONSOLE_BINARY_PATH]
   end
 
   def install_binaries
