@@ -26,8 +26,7 @@ class LanguagePack::Rails2 < LanguagePack::Ruby
                     "bundle exec ruby script/server -p $PORT"
 
     super.merge({
-      "web" => web_process,
-      "worker" => "bundle exec rake jobs:work"
+      "web" => web_process
     })
   end
 
