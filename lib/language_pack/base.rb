@@ -60,8 +60,8 @@ class LanguagePack::Base
   def release
     setup_language_pack_environment
 
-    {
-      "addons" => default_addons,
+    yaml = {
+      "addons" => [],#default_addons,
       "config_vars" => default_config_vars,
       "default_process_types" => default_process_types
     }.to_yaml
