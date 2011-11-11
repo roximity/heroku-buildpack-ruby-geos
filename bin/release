@@ -10,6 +10,7 @@ if pack = LanguagePack.detect(ARGV[0], ARGV[1])
   begin
     YAML.load(yaml)
   rescue ArgumentError
+    print "ERROR: "
     exit 1
   ensure
     puts yaml
