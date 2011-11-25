@@ -51,6 +51,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       install_binaries
       allow_git { run_assets_precompile_rake_task }
     end
+    topic("ADDONS: #{default_addons}")
   end
 
 private
