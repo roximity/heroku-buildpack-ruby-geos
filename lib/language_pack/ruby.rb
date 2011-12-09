@@ -46,6 +46,7 @@ class LanguagePack::Ruby < LanguagePack::Base
     setup_language_pack_environment
     allow_git do
       install_language_pack_gems
+      clear_gem_specs_cache
       build_bundler
       create_database_yml
       install_binaries
@@ -230,6 +231,12 @@ ERROR
     Dir.chdir(dir) do |dir|
       run("curl #{VENDOR_URL}/#{LIBYAML_PATH}.tgz -s -o - | tar xzf -")
     end
+  end
+
+  # clear the gem specs cache (to remove broken yaml gemspecs)
+  def clear_gem_specs_cache
+    topic("Clearing gem specs cache")
+    run("gem sources -c")
   end
 
   # runs bundler to install the dependencies
