@@ -246,6 +246,8 @@ ERROR
       bundle_command = "bundle install --without #{bundle_without} --path vendor/bundle --binstubs bin/"
       syck_hack      = File.expand_path(File.dirname(__FILE__), "vendor/syck_hack")
 
+      puts "SYCK HACK: #{syck_hack}"
+
       unless File.exist?("Gemfile.lock")
         error "Gemfile.lock is required. Please run \"bundle install\" locally\nand commit your Gemfile.lock."
       end
