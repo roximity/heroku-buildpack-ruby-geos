@@ -244,7 +244,7 @@ ERROR
     log("bundle") do
       bundle_without = ENV["BUNDLE_WITHOUT"] || "development:test"
       bundle_command = "bundle install --without #{bundle_without} --path vendor/bundle --binstubs bin/"
-      syck_hack      = File.expand_path(File.dirname(__FILE__), "vendor/syck_hack")
+      syck_hack      = File.expand_path(File.join(File.dirname(__FILE__), "../../vendor/syck_hack"))
 
       puts "SYCK HACK: #{syck_hack}"
 
