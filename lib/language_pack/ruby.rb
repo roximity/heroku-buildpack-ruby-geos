@@ -237,7 +237,6 @@ ERROR
   def clear_gem_specs_cache
     topic("Clearing gem specs cache")
     run("gem sources -c")
-    puts(run("gem spec -r curb-fu --version 0.6.1"))
   end
 
   # runs bundler to install the dependencies
@@ -302,8 +301,6 @@ ERROR
 
         error error_message
       end
-
-      puts run("cat vendor/bundle/ruby/1.9.1/specifications/curb-fu-0.6.1.gemspec")
     end
   end
 
