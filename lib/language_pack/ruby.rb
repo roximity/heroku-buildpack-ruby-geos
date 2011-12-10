@@ -244,6 +244,7 @@ ERROR
     log("bundle") do
       bundle_without = ENV["BUNDLE_WITHOUT"] || "development:test"
       bundle_command = "bundle install --without #{bundle_without} --path vendor/bundle --binstubs bin/"
+      syck_hack      = File.expand_path(File.dirname(__FILE__), "vendor/syck_hack")
 
       unless File.exist?("Gemfile.lock")
         error "Gemfile.lock is required. Please run \"bundle install\" locally\nand commit your Gemfile.lock."
@@ -260,7 +261,7 @@ ERROR
 
       cache_load "vendor/bundle"
 
-      version = run("bundle version").strip
+      version = run("env RUBYOPT=\"-r #{syck_hack}\" bundle version").strip
       topic("Installing dependencies using #{version}")
 
       bundler_output = ""
@@ -271,7 +272,6 @@ ERROR
         # need to setup compile environment for the psych gem
         yaml_include   = File.expand_path("#{libyaml_dir}/include")
         yaml_lib       = File.expand_path("#{libyaml_dir}/lib")
-        syck_hack      = File.expand_path(File.dirname(__FILE__), "vendor/syck_hack")
         pwd            = run("pwd").chomp
         # we need to set BUNDLE_CONFIG and BUNDLE_GEMFILE for
         # codon since it uses bundler.
