@@ -31,6 +31,8 @@ class LanguagePack::Ruby < LanguagePack::Base
       "LANG"     => "en_US.UTF-8",
       "PATH"     => default_path,
       "GEM_PATH" => slug_vendor_base,
+      "LD_LIBRARY_PATH" => "gdal/geos/lib/:$LD_LIBRARY_PATH",
+      "LD_LIBRARY_PATH" => "gdal/gdal/lib/:$LD_LIBRARY_PATH"
     }
 
     ruby_version_jruby? ? vars.merge("JAVA_OPTS" => default_java_opts) : vars
