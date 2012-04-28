@@ -248,10 +248,10 @@ ERROR
     FileUtils.mkdir_p("gdal")
     # borrowing from https://github.com/mjumbewu/heroku-buildpack-python-no-node/blob/master/bin/compile
     bucket = "https://s3.amazonaws.com/cirheroku/"
-    %w(gdal-1.8.1 proj4-4.7.0 geos-3.3.2).each do |bin_src|
+    %w(gdal-1.8.1-heroku proj4-4.7.0-heroku geos-3.3.2-herkou).each do |bin_src|
       url = [bucket, bin_src].join
       Dir.chdir("gdal") do |dir|
-        run("curl #{url}-heroku.tar.gz -s -o - | tar xzf -")
+        run("curl #{url}.tar.gz -s -o - | tar xzf -")
       end
     end
   end
