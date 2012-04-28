@@ -253,7 +253,9 @@ ERROR
       geos-3.3.2-herkou
     ).each do |bin_src|
       url = [bucket, bin_src].join
-      run("curl #{url}.tar.gz -s -o - | tar xzf -")
+      Dir.chdir("bin") do |dir|
+        run("curl #{url}.tar.gz -s -o - | tar xzf -")
+      end
     end
   end
 
