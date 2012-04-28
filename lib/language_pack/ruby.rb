@@ -52,6 +52,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       build_bundler
       create_database_yml
       install_binaries
+      install_geo
       run_assets_precompile_rake_task
     end
   end
@@ -241,6 +242,19 @@ ERROR
   def install_binaries
     binaries.each {|binary| install_binary(binary) }
     Dir["bin/*"].each {|path| run("chmod +x #{path}") }
+  end
+
+  def install_geo
+    # borrowing from https://github.com/mjumbewu/heroku-buildpack-python-no-node/blob/master/bin/compile
+    bucket = "https://s3.amazonaws.com/cirheroku/"
+    %w(
+      gdal-1.8.1-heroku.tar.gz
+      proj4-4.7.0-heroku.tar.gz
+      geos-3.3.2-herkou
+    ).each do |bin_src|
+      url = [bucket, bin_src].join
+      run("curl #{url}.tar.gz -s -o - | tar xzf -")
+    end
   end
 
   # vendors individual binary into the slug
