@@ -245,6 +245,7 @@ ERROR
   end
 
   def install_geo
+    FileUtils.mkdir_p("gdal")
     # borrowing from https://github.com/mjumbewu/heroku-buildpack-python-no-node/blob/master/bin/compile
     bucket = "https://s3.amazonaws.com/cirheroku/"
     %w(
