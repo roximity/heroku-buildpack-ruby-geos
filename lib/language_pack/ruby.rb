@@ -32,7 +32,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       "PATH"     => default_path,
       "GEM_PATH" => slug_vendor_base,
       "GEOS_LIBRARY_PATH" => "gdal/geos/lib",
-      "LD_LIBRARY_PATH" => "#{build_path}/vendor/ruby-1.9.3/lib:/gdal/geos/lib/:gdal/gdal/lib/"
+      "LD_LIBRARY_PATH" => "#{build_path}/vendor/ruby-1.9.3/lib:#{build_path}/gdal/geos/lib/:#{build_path}/gdal/gdal/lib/"
     }
 
     ruby_version_jruby? ? vars.merge("JAVA_OPTS" => default_java_opts) : vars
