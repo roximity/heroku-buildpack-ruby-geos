@@ -31,7 +31,7 @@ class LanguagePack::Ruby < LanguagePack::Base
       "LANG"     => "en_US.UTF-8",
       "PATH"     => default_path,
       "GEM_PATH" => slug_vendor_base,
-      "GEOS_LIBRARY_PATH" => "/app/gdal/geos/lib",
+      "GEOS_LIBRARY_PATH" => "gdal/geos/lib",
       "LD_LIBRARY_PATH" => "gdal/geos/lib/:gdal/gdal/lib/"
     }
 
