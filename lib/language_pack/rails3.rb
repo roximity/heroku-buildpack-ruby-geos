@@ -62,6 +62,8 @@ private
           puts run("which rake")
           puts run("rake -v")
           puts run("bundle exec gem list")
+          puts run("ruby -e 'puts $:.inspect'")
+          puts run("ruby -e \"require 'ffi-geos'\"")
 
           rake_output << run("bundle exec rake assets:precompile --trace")
           topic rake_output
