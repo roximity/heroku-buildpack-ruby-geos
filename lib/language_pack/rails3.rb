@@ -12,7 +12,7 @@ class LanguagePack::Rails3 < LanguagePack::Rails2
   end
 
   def name
-    "Ruby/Rails"
+    "Ruby/Rails 3"
   end
 
   def default_process_types
@@ -39,7 +39,7 @@ private
     log("assets_precompile") do
       setup_database_url_env
 
-      if rake_task_defined?("assets:precompile")
+#      if rake_task_defined?("assets:precompile")
         topic("Preparing app for Rails asset pipeline")
         if File.exists?("public/assets/manifest.yml")
           puts "Detected manifest.yml, assuming assets were compiled locally"
@@ -67,9 +67,10 @@ private
             puts "http://devcenter.heroku.com/articles/rails31_heroku_cedar#troubleshooting"
           end
         end
-      else
-        topic("Could not run asset compilation...")
-      end
+#      else
+#        topic("Could not run asset compilation...")
+#      end
+
     end
   end
 

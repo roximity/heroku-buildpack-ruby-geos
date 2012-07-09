@@ -12,7 +12,7 @@ class LanguagePack::Rails2 < LanguagePack::Ruby
   end
 
   def name
-    "Ruby/Rails"
+    "Ruby/Rails 2"
   end
 
   def default_config_vars

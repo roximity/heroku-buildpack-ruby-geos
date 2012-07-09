@@ -49,6 +49,7 @@ class LanguagePack::Ruby < LanguagePack::Base
     Dir.chdir(build_path)
     install_ruby
     setup_language_pack_environment
+    topic("Setup env: #{ENV.inspect}")
     allow_git do
       install_language_pack_gems
       build_bundler
