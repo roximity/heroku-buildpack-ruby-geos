@@ -35,6 +35,7 @@ private
 
   # runs the tasks for the Rails 3.1 asset pipeline
   def run_assets_precompile_rake_task
+    topic("Compiling assets...")
     log("assets_precompile") do
       setup_database_url_env
 
@@ -42,18 +43,23 @@ private
         topic("Preparing app for Rails asset pipeline")
         if File.exists?("public/assets/manifest.yml")
           puts "Detected manifest.yml, assuming assets were compiled locally"
+          topic "Detected manifest.yml, assuming assets were compiled locally"
         else
+          topic "No manifest.yml..."
+
           ENV["RAILS_GROUPS"] ||= "assets"
           ENV["RAILS_ENV"]    ||= "production"
 
           puts "Running: rake assets:precompile"
           rake_output = ""
           rake_output << run("env PATH=$PATH:bin bundle exec rake assets:precompile 2>&1")
-          puts rake_output
+          topic rake_output
 
           if $?.success?
+            topic "Asset success..."
             log "assets_precompile", :status => "success"
           else
+            topic "Asset failure..."
             log "assets_precompile", :status => "failure"
             puts "Precompiling assets failed, enabling runtime asset compilation"
             install_plugin("rails31_enable_runtime_asset_compilation")
@@ -61,6 +67,8 @@ private
             puts "http://devcenter.heroku.com/articles/rails31_heroku_cedar#troubleshooting"
           end
         end
+      else
+        topic("Could not run asset compilation...")
       end
     end
   end
