@@ -53,8 +53,11 @@ class LanguagePack::Ruby < LanguagePack::Base
       install_language_pack_gems
       build_bundler
       create_database_yml
+      topic("Installing binaries...")
       install_binaries
+      topic("Installing geo...")
       install_geo
+      topic("Asset compilation...")
       run_assets_precompile_rake_task
     end
   end
@@ -490,6 +493,8 @@ params = CGI.parse(uri.query || "")
     if rake_task_defined?("assets:precompile")
       topic "Running: rake assets:precompile"
       pipe("env PATH=$PATH:bin bundle exec rake assets:precompile 2>&1")
+    else
+      topic("Cannot run assets:precompile -- task not defined")
     end
   end
 end
