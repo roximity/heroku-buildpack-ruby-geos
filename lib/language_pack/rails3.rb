@@ -57,8 +57,13 @@ private
           puts run("ls $GEOS_LIBRARY_PATH")
           puts run("echo $LD_LIBRARY_PATH")
           puts run("ls $LD_LIBRARY_PATH")
+          puts run("which bundle")
+          puts run("ruby -v")
+          puts run("which rake")
+          puts run("rake -v")
+          puts run("bundle exec gem list")
 
-          rake_output << run("env PATH=$PATH:bin  bundle exec rake assets:precompile --trace")
+          rake_output << run("bundle exec rake assets:precompile --trace")
           topic rake_output
 
           if $?.success?
