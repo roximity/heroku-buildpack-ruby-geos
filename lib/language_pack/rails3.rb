@@ -52,7 +52,12 @@ private
 
           puts "Running: rake assets:precompile"
           rake_output = ""
-          #puts run("env PATH=$PATH:bin LD_LIBRARY_PATH=#{default_config_vars['LD_LIBRARY_PATH']} bundle exec ruby -e 'require \"ffi-geos\"'")
+          puts run("echo $PWD")
+          puts run("ls $PWD")
+          puts run("ls $GEOS_LIBRARY_PATH")
+          puts run("echo $LD_LIBRARY_PATH")
+          puts run("ls $LD_LIBRARY_PATH")
+
           rake_output << run("env PATH=$PATH:bin  bundle exec rake assets:precompile --trace")
           topic rake_output
 
