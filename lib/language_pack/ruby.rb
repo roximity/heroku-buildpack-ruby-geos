@@ -252,14 +252,18 @@ ERROR
 
   def install_geo
     FileUtils.mkdir_p("gdal")
-    # borrowing from https://github.com/mjumbewu/heroku-buildpack-python-no-node/blob/master/bin/compile
-    bucket = "https://s3.amazonaws.com/cirheroku/"
-    %w(gdal-1.8.1-heroku proj4-4.7.0-heroku geos-3.3.2-herkou).each do |bin_src|
-      url = [bucket, bin_src].join
-      Dir.chdir("gdal") do |dir|
-        run("curl #{url}.tar.gz -s -o - | tar xzf -")
-      end
-    end
+		if File.exists?('./gdal/gdal') and File.exists?('./gdal/geos') and File.exists?('./gdal/proj4')
+			puts ("GEOS already installed.")
+		else
+			# borrowing from https://github.com/mjumbewu/heroku-buildpack-python-no-node/blob/master/bin/compile
+			bucket = "https://s3.amazonaws.com/cirheroku/"
+			%w(gdal-1.8.1-heroku proj4-4.7.0-heroku geos-3.3.2-herkou).each do |bin_src|
+				url = [bucket, bin_src].join
+				Dir.chdir("gdal") do |dir|
+					run("curl #{url}.tar.gz -s -o - | tar xzf -")
+				end
+			end
+		end
   end
 
   # vendors individual binary into the slug
